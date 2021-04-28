@@ -1,0 +1,31 @@
+.BadgesList ul > li {
+  margin-bottom: 1rem;
+}
+
+.BadgesListItem {
+  background: #ffffff;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.23);
+  border-radius: 5px;
+  display: flex;
+  padding: 1rem;
+  margin-bottom: 5px;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+
+.BadgesListItem__avatar {
+  border-radius: 50%;
+  background: #a3a3a3;
+  margin-right: 0.5rem;
+  width: 80px;
+  height: 80px;
+}
+
+.BadgesListItem__twitter {
+  font-size: 12px;
+}
+
+.twitter_icon {
+  color: aqua;
+  margin: 0 5px;
+}
