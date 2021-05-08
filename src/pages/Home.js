@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import astronautsImage from '../assets/images/astronauts.svg';
 import platziconfLogoImage from '../assets/images/platziconf-logo.svg';

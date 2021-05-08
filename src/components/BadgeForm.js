@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 export default function BadgeForm(props) {
   return (
     <Fragment>
-      <form>
+      <form onSubmit={props.onSubmit}>
         <div className="form-group">
           <label className="">First Name</label>
           <input
@@ -55,7 +55,7 @@ export default function BadgeForm(props) {
           />
         </div>
         <button className="button btn btn-primary">Save</button>
-        {/* {props.error && <p className="text-danger">{props.error.message}</p>} */}
+        {props.error && <p className="text-danger">{props.error.message}</p>}
       </form>
     </Fragment>
   );

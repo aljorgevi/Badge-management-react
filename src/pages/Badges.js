@@ -1,42 +1,47 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/images/badge-header.svg';
+import { firebase } from '../firebase';
 import BadgesList from '../components/BadgesList';
+import logo from '../assets/images/badge-header.svg';
 import '../styles/pages/Badges.css';
+import PageError from '../components/PageError';
 
 export default function Badges() {
-  const [Data, setData] = useState([
-    {
-      id: '2de30c42-9deb-40fc-a41f-05e62b5939a7',
-      irstName: 'Freda',
-      lastName: 'Grady',
-      email: 'Leann_Berge@gmail.com',
-      jobTitle: 'Legacy Brand Director',
-      twitter: 'FredaGrady22221-7573',
-      avatarUrl:
-        'https://www.gravatar.com/avatar/f63a9c45aca0e7e7de0782a6b1dff40b?d=identicon',
-    },
-    {
-      id: 'd00d3614-101a-44ca-b6c2-0be075aeed3d',
-      firstName: 'Major',
-      lastName: 'Rodriguez',
-      email: 'Ilene66@hotmail.com',
-      jobTitle: 'Human Research Architect',
-      twitter: 'ajorRodriguez61545',
-      avatarUrl:
-        'https://www.gravatar.com/avatar/d57a8be8cb9219609905da25d5f3e50a?d=identicon',
-    },
-    {
-      id: '63c03386-33a2-4512-9ac1-354ad7bec5e9',
-      firstName: 'Daphney',
-      lastName: 'Torphy',
-      email: 'Ron61@hotmail.com',
-      jobTitle: 'National Markets Officer',
-      twitter: 'DaphneyTorphy96105',
-      avatarUrl:
-        'https://www.gravatar.com/avatar/e74e87d40e55b9ff9791c78892e55cb7?d=identicon',
-    },
-  ]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [Data, setData] = useState([]);
+
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+
+    const getData = async () => {
+      try {
+        const db = firebase.firestore();
+        const data = await db
+          .collection('badges')
+          .orderBy('firstName', 'desc')
+          .get();
+
+        const arrayData = data.docs.map((item) => ({
+          id: item.id,
+          ...item.data(),
+        }));
+        setTimeout(() => setLoading(false), 500);
+        setError(null);
+        setData(arrayData);
+      } catch (error) {
+        setError(error);
+      }
+    };
+
+    getData();
+  }, []);
+
+  if (error) {
+    return <PageError error={error} />;
+  }
+
   return (
     <Fragment>
       <div className="Badges">
@@ -54,7 +59,7 @@ export default function Badges() {
                 New Badge
               </Link>
             </div>
-            <BadgesList badges={Data} />
+            <BadgesList loading={loading} badges={Data} />
           </div>
         </div>
       </div>

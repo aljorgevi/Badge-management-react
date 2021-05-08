@@ -1,13 +1,12 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { firebase } from '../firebase';
 import Badge from '../components/Badge';
 import BadgeForm from '../components/BadgeForm';
 import logo from '../assets/images/badge-header.svg';
-import '../styles/pages/BadgeNew.css';
-import Skeleton from '../components/Skeleton/Skeleton';
 import Spinner from '../components/Spinner/Spinner';
+import '../styles/pages/BadgeEdit.css';
 
-export default function BadgeNew(props) {
+export default function BadgeEdit(props) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -17,6 +16,34 @@ export default function BadgeNew(props) {
     jobTitle: '',
     twitter: '',
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        let idEdited = props.match.params.badgeId;
+
+        const db = firebase.firestore();
+        // const data = await db.collection(`badges/${idEdited}`).get();
+
+        const data = await db.collection('badges').get();
+        const arrayData = data.docs.map((item) => ({
+          id: item.id,
+          ...item.data(),
+        }));
+        const arrayFilter = arrayData.filter((item) => item.id === idEdited);
+
+        setFormData(arrayFilter[0]);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        setError(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleChange = (e) => {
     const lenghtValue = e.target.value;
@@ -37,8 +64,9 @@ export default function BadgeNew(props) {
     setLoading(true);
 
     try {
+      const idEdited = props.match.params.badgeId;
       const db = firebase.firestore();
-      const data = await db.collection('badges').add(formData);
+      await db.collection('badges').doc(idEdited).update(formData);
       setLoading(false);
 
       props.history.push('/badges');
@@ -53,8 +81,12 @@ export default function BadgeNew(props) {
 
   return (
     <Fragment>
-      <div className="BadgeNew__hero">
-        <img className="BadgeNew__hero-image img-fluid" src={logo} alt="Logo" />
+      <div className="BadgeEdit__hero">
+        <img
+          className="BadgeEdit__hero-image img-fluid"
+          src={logo}
+          alt="Logo"
+        />
       </div>
       <div className="container">
         <div className="row">
@@ -69,7 +101,7 @@ export default function BadgeNew(props) {
             />
           </div>
           <div className="col-6">
-            <h1>New Attendant</h1>
+            <h1>Edit Attendant</h1>
             <BadgeForm
               formData={formData}
               onChange={handleChange}
