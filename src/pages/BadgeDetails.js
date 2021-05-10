@@ -17,10 +17,10 @@ export default function BadgeDetails({
       <div className="BadgeDetails__hero">
         <div className="container">
           <div className="row">
-            <div className="col-6">
+            <div className="col-12 col-md-6">
               <img src={confLogo} alt="conf-logo" />
             </div>
-            <div className="col-6 BadgeDetails__hero-attendant-name">
+            <div className="col-12 col-md-6 BadgeDetails__hero-attendant-name">
               <h1>{data.firstName} </h1>
             </div>
           </div>
@@ -29,7 +29,7 @@ export default function BadgeDetails({
 
       <div className="container">
         <div className="row">
-          <div className="col">
+          <div className="col-12 col-md-6">
             <Badge
               firstName={data.firstName}
               lastName={data.lastName}
@@ -38,7 +38,7 @@ export default function BadgeDetails({
               jobTitle={data.jobTitle}
             />
           </div>
-          <div className="col">
+          <div className="col-12 col-md-6">
             <h2>Actions</h2>
             <div>
               <div>

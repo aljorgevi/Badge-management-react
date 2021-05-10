@@ -58,7 +58,7 @@ export default function BadgeNew(props) {
       </div>
       <div className="container">
         <div className="row">
-          <div className="col-6">
+          <div className="col-12 col-md-6 order-2 order-md-1">
             <Badge
               avatarUrl="https://www.gravatar.com/avatar?d=identicon"
               firstName={formData.firstName || 'FIRST_NAME'}
@@ -68,7 +68,7 @@ export default function BadgeNew(props) {
               email={formData.email || 'EMAIL'}
             />
           </div>
-          <div className="col-6">
+          <div className="col-12 col-md-6 order-1 mb-5 order-md-2">
             <h1>New Attendant</h1>
             <BadgeForm
               formData={formData}

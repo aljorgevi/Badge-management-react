@@ -72,14 +72,14 @@ export default function BadgesList(props) {
                       to={`/badges/${badge.id}`}
                     >
                       <div className="row BadgesListItem">
-                        <div className="col-2">
+                        <div className="col-12 col-md-2 img-wrapper">
                           <Gravatar
                             className="Badge__avatar-list"
                             email={badge.email}
                             alt="Avatar"
                           />
                         </div>
-                        <div className="col-10">
+                        <div className="col-12 col-md-10">
                           <div className="">
                             <div>
                               {badge.firstName} {badge.lastName}

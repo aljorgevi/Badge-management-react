@@ -11,6 +11,7 @@
   margin-bottom: 5px;
   margin-right: 0 !important;
   margin-left: 0 !important;
+  text-align: center;
 }
 
 .BadgesListItem__avatar {
@@ -28,4 +29,15 @@
 .twitter_icon {
   color: aqua;
   margin: 0 5px;
+}
+
+.Badge__avatar-list {
+  display: block;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .BadgesListItem {
+    text-align: inherit;
+  }
 }
