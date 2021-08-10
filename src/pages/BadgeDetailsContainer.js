@@ -35,6 +35,7 @@ export default function BadgeDetailsContainer(props) {
       }
     };
     fetchData();
+    // eslint-disable-next-line
   }, []);
 
   if (loading) {

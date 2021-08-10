@@ -4,7 +4,6 @@ import Badge from '../components/Badge';
 import BadgeForm from '../components/BadgeForm';
 import logo from '../assets/images/badge-header.svg';
 import '../styles/pages/BadgeNew.css';
-import Skeleton from '../components/Skeleton/Skeleton';
 import Spinner from '../components/Spinner/Spinner';
 
 export default function BadgeNew(props) {
@@ -38,6 +37,7 @@ export default function BadgeNew(props) {
 
     try {
       const db = firebase.firestore();
+      // eslint-disable-next-line
       const data = await db.collection('badges').add(formData);
       setLoading(false);
 
@@ -53,14 +53,14 @@ export default function BadgeNew(props) {
 
   return (
     <Fragment>
-      <div className="BadgeNew__hero">
-        <img className="BadgeNew__hero-image img-fluid" src={logo} alt="Logo" />
+      <div className='BadgeNew__hero'>
+        <img className='BadgeNew__hero-image img-fluid' src={logo} alt='Logo' />
       </div>
-      <div className="container">
-        <div className="row">
-          <div className="col-12 col-md-6 order-2 order-md-1">
+      <div className='container'>
+        <div className='row'>
+          <div className='col-12 col-md-6 order-2 order-md-1'>
             <Badge
-              avatarUrl="https://www.gravatar.com/avatar?d=identicon"
+              avatarUrl='https://www.gravatar.com/avatar?d=identicon'
               firstName={formData.firstName || 'FIRST_NAME'}
               lastName={formData.lastName || 'LAST_NAME'}
               twitter={formData.twitter || 'TWITTER'}
@@ -68,7 +68,7 @@ export default function BadgeNew(props) {
               email={formData.email || 'EMAIL'}
             />
           </div>
-          <div className="col-12 col-md-6 order-1 mb-5 order-md-2">
+          <div className='col-12 col-md-6 order-1 mb-5 order-md-2'>
             <h1>New Attendant</h1>
             <BadgeForm
               formData={formData}

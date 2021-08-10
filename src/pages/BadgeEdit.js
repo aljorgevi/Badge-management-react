@@ -26,7 +26,6 @@ export default function BadgeEdit(props) {
         let idEdited = props.match.params.badgeId;
 
         const db = firebase.firestore();
-        // const data = await db.collection(`badges/${idEdited}`).get();
 
         const data = await db.collection('badges').get();
         const arrayData = data.docs.map((item) => ({
@@ -43,6 +42,7 @@ export default function BadgeEdit(props) {
       }
     };
     fetchData();
+    // eslint-disable-next-line
   }, []);
 
   const handleChange = (e) => {
@@ -81,18 +81,18 @@ export default function BadgeEdit(props) {
 
   return (
     <Fragment>
-      <div className="BadgeEdit__hero">
+      <div className='BadgeEdit__hero'>
         <img
-          className="BadgeEdit__hero-image img-fluid"
+          className='BadgeEdit__hero-image img-fluid'
           src={logo}
-          alt="Logo"
+          alt='Logo'
         />
       </div>
-      <div className="container">
-        <div className="row">
-          <div className="col-12 col-md-6 order-2 order-md-1">
+      <div className='container'>
+        <div className='row'>
+          <div className='col-12 col-md-6 order-2 order-md-1'>
             <Badge
-              avatarUrl="https://www.gravatar.com/avatar?d=identicon"
+              avatarUrl='https://www.gravatar.com/avatar?d=identicon'
               firstName={formData.firstName || 'FIRST_NAME'}
               lastName={formData.lastName || 'LAST_NAME'}
               twitter={formData.twitter || 'TWITTER'}
@@ -100,7 +100,7 @@ export default function BadgeEdit(props) {
               email={formData.email || 'EMAIL'}
             />
           </div>
-          <div className="col-12 col-md-6 order-1 mb-5 order-md-2">
+          <div className='col-12 col-md-6 order-1 mb-5 order-md-2'>
             <h1>Edit Attendant</h1>
             <BadgeForm
               formData={formData}
